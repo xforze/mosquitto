@@ -12,6 +12,8 @@ ADD ca.crt /
 ADD server.key /
 ADD server.crt /
 ADD haproxy.cfg /etc/haproxy/
+ADD sub /
+RUN chmod a+x /sub
 RUN ldconfig
 RUN pip3 install paho-mqtt
 RUN mkdir /var/run/haproxy
