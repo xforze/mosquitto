@@ -35,7 +35,7 @@ def publish(n):
         #client.tls_insecure_set(True)
 #        client.connect("10.1.6.21", 1883, 60)
         client.username_pw_set('VS-Server', 'test')
-        client.connect("127.0.0.1", 5000, 60)
+        client.connect("emqx-openshift", 1883, 60)
         client.loop_start()
         ret=client.publish("mosq-bvMFqWBanjpOIXw1uG/gw/test", payload = lines[n].rstrip('\n'), qos=2)
         client.loop_stop()
