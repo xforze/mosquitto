@@ -1,2 +1,1 @@
 mosquitto_sub -h emqx-openshift -p 80 -u VS-Server -P test -i mosq-bvMFqWBanjpOIXw1uG  -t mosq-bvMFqWBanjpOIXw1uG/gw/test -q 1 -c > out
-cat out | sort -n > out.sort && diff rnd.list.5000 out.sort
