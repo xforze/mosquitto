@@ -1,0 +1,55 @@
+# Import paho-mqtt Client class:                                                                                                                                                                                                                
+import paho.mqtt.client as mqtt
+import threading
+from threading import Thread
+import time
+
+f=open('rnd.list')
+lines=f.readlines()
+
+
+n=-1
+
+#def on_connect(client, userdata, flags, rc):
+#  print("Connection returned with result code:" + str(rc))
+
+#def on_publish(client, userdata, mid):
+#  print(mid)
+
+def on_disconnect(client, userdata, rc):
+#  print("Disconnection returned result:"+ str(rc))
+#  print(threading.active_count())
+  global n
+  n += 1
+  if n <60000:
+    t = Thread(target=publish, args=(n,))
+    t.start()
+  else:
+    exit
+
+
+def publish(n):
+        print("Run: "+str(n))
+        client = mqtt.Client()
+        client.on_disconnect= on_disconnect
+        client.tls_set(ca_certs="ca.crt", certfile="server.crt", keyfile="server.key")
+        client.tls_insecure_set(True)
+        #client.connect("10.1.4.31", 8883, 60)
+        #client.connect("10.1.255.56", 1883, 60)
+        client.connect("192.168.0.111", 80, 60)
+        client.loop_start()
+        #client.publish("a"+str(n), payload = "Hello world!", qos=1)
+        #ret=client.publish("my/topic", payload = lines[n].rstrip('\n'), qos=1)
+        ret=client.publish("topic", payload = lines[n].rstrip('\n'), qos=1)
+        client.loop_stop()
+        time.sleep(0.25)
+        client.disconnect()
+        return 0
+
+for i in range(500):
+  n += 1
+  if n <60000:
+    t = Thread(target=publish, args=(n,))
+    t.start()
+  else:
+    exit
