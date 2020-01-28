@@ -38,7 +38,7 @@ def publish(n):
 #        client.connect("emqx-openshift", 80, 60)
         client.connect("localhost", 5000, 60)
         client.loop_start()
-        ret=client.publish("mosq-bvMFqWBanjpOIXw1uG/gw/test", payload = lines[n].rstrip('\n'), qos=2)
+        ret=client.publish("mosq-bvMFqWBanjpOIXw1uG/gw/test", payload = lines[n].rstrip('\n'), qos=1)
         client.loop_stop()
         time.sleep(0.5)
         client.disconnect()
