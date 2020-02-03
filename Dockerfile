@@ -16,7 +16,7 @@ RUN ldconfig
 RUN pip3 install paho-mqtt
 RUN mkdir /var/run/haproxy
 RUN wget http://erlang.org/download/otp_src_21.3.tar.gz
-RUN tar -xzvf otp_src_21.3.tar.gz
+RUN tar -xzf otp_src_21.3.tar.gz
 RUN cd otp_src_21.3 && ./configure && make -j 8 && make install
 RUN git clone https://github.com/emqx/emqtt-bench.git
 RUN cd emqtt-bench && make
