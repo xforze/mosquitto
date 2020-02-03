@@ -20,4 +20,4 @@ RUN tar -xzvf otp_src_21.3.tar.gz
 RUN cd otp_src_21.3 && ./configure && make -j 8 && make install
 RUN git clone https://github.com/emqx/emqtt-bench.git
 RUN cd emqtt-bench && make
-CMD ["/emqtt_bench/emqtt_bench pub","-c","3000","-I","10","-u","VS-Server","-P","test","-t","mosq-bvMFqWBanjpOIXw1uG/gw/test","-s","256","-h","emqx-openshift","-p","80"]
+CMD ["./emqtt_bench pub","-c","3000","-I","10","-u","VS-Server","-P","test","-t","mosq-bvMFqWBanjpOIXw1uG/gw/test","-s","256","-h","emqx-openshift","-p","80"]
