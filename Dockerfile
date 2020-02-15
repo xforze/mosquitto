@@ -22,4 +22,4 @@ RUN cd / && git clone https://github.com/emqx/emqtt-bench.git
 RUN cd emqtt-bench && make
 RUN cp /emqtt-bench/emqtt_bench /usr/local/bin/emqtt_bench
 #CMD ["sleep","infinity"]
-CMD ["emqtt_bench","pub","-c","1000","-I","100","-u","VS-Server","-P","test","-t","mosq-bvMFqWBanjpOIXw1uG/gw/test","-s","256","-q","1","-h","emqx-openshift","-p","1883"]
+CMD ["emqtt_bench","pub","-c","1000","-I","1000","-u","VS-Server","-P","test","-t","mosq-bvMFqWBanjpOIXw1uG/gw/test","-s","256","-q","1","-h","emqx-openshift","-p","1883"]
