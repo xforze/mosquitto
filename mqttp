@@ -4,7 +4,7 @@ import threading
 from threading import Thread
 import time
 
-f=open('rnd.list')
+f=open('rnd.list.5000')
 lines=f.readlines()
 
 
@@ -21,7 +21,7 @@ def on_disconnect(client, userdata, rc):
 #  print(threading.active_count())
   global n
   n += 1
-  if n <60000:
+  if n <5000:
     t = Thread(target=publish, args=(n,))
     t.start()
   else:
@@ -32,11 +32,11 @@ def publish(n):
         print("Run: "+str(n))
         client = mqtt.Client()
         client.on_disconnect= on_disconnect
-        client.tls_set(ca_certs="ca.crt", certfile="server.crt", keyfile="server.key")
-        client.tls_insecure_set(True)
+        #client.tls_set(ca_certs="ca.crt", certfile="server.crt", keyfile="server.key")
+        #client.tls_insecure_set(True)
         #client.connect("10.1.4.31", 8883, 60)
         #client.connect("10.1.255.56", 1883, 60)
-        client.connect("192.168.0.111", 80, 60)
+        client.connect("emqx-openshift", 1883, 60)
         client.loop_start()
         #client.publish("a"+str(n), payload = "Hello world!", qos=1)
         #ret=client.publish("my/topic", payload = lines[n].rstrip('\n'), qos=1)
@@ -46,9 +46,9 @@ def publish(n):
         client.disconnect()
         return 0
 
-for i in range(500):
+for i in range(50):
   n += 1
-  if n <60000:
+  if n <5000:
     t = Thread(target=publish, args=(n,))
     t.start()
   else:
